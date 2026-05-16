@@ -676,8 +676,10 @@
             localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
         });
         
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'dark') {
+        // Load saved theme — default to dark unless user explicitly chose light
+        if (localStorage.getItem('theme') === 'light') {
+            html.classList.remove('dark');
+        } else {
             html.classList.add('dark');
         }
         
