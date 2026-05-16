@@ -1,211 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abednego Tenge - Backend & Cloud Engineer</title>
-    <meta name="description" content="Backend Engineer and AWS Solutions Architect Associate specializing in scalable, secure cloud-based systems and data-driven solutions.">
+    <title>Portfolio — Backend & DevOps Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Manrope', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
+        ::selection { background: #fff; color: #000; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #404040; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        /* html, body {
-            overflow-x: hidden;
-        } */
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
         }
-        
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
-        
-        .skill-bar {
-            transition: width 2s ease-in-out;
-        }
-        
-        .project-card {
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .testimonial-card {
-            min-height: 200px;
-        }
-        
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        }
-        
-        .scroll-smooth {
-            scroll-behavior: smooth;
-        }
-        
-        .back-to-top {
+        .animate-marquee { animation: marquee 40s linear infinite; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        .grain {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            inset: 0;
+            z-index: 50;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
-        
-        .back-to-top.visible {
+
+        .skill-bar { transition: width 1.5s ease-out; }
+
+        .cert-badge {
+            background: linear-gradient(135deg, #262626 0%, #171717 100%);
+        }
+
+        .project-card:hover .project-visual {
+            border-color: #404040;
+        }
+        .project-card:hover .project-visual svg {
             opacity: 1;
+        }
+        .project-visual svg {
+            opacity: 0.7;
+            transition: opacity 0.7s ease-out;
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #4ade80;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .aws-gradient {
+            background: linear-gradient(135deg, #4ade80 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .architecture-line {
+            stroke-dasharray: 8 4;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        .flow-arrow {
+            stroke-dasharray: 6 3;
+            animation: flowDash 2s linear infinite;
+        }
+        @keyframes flowDash {
+            to { stroke-dashoffset: -18; }
         }
     </style>
 </head>
-<body class="scroll-smooth bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+<body class="bg-[#050505] text-[#e5e5e5] font-sans antialiased overflow-x-hidden">
+
+    <div class="grain"></div>
+
+    <div class="fixed top-[-200px] right-[-200px] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-200px] left-[-200px] w-[500px] h-[500px] bg-neutral-800/10 rounded-full blur-[100px] pointer-events-none"></div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">
-                    <span class="hidden sm:inline">Abednego Tenge</span>
-                    <span class="sm:hidden">A. Tenge</span>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
-                    <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-                    <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
-                    <a href="#services" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
-                    <a href="#testimonials" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Testimonials</a>
-                    <a href="#blog" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</a>
-                    <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:inline"></i>
-                    </button>
-                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+    <nav class="fixed top-0 left-0 right-0 z-40 mix-blend-difference">
+        <div class="max-w-screen-2xl mx-auto px-6 py-6 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 bg-white text-black rounded-sm flex items-center justify-center font-display font-bold text-sm">&lt;/&gt;</div>
+                <span class="font-display font-medium text-white text-sm tracking-wide hidden sm:block">devops.engineer</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">About</a>
+                <a href="#skills" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#certifications" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">Certs</a>
+                <a href="#projects" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">Projects</a>
+                <a href="#labs" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">Labs</a>
+                <a href="#contact" class="nav-link text-xs font-medium uppercase tracking-widest text-white/70 hover:text-white transition-colors duration-300">Contact</a>
             </div>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-                <div class="px-4 py-4 space-y-4">
-                    <a href="#home" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
-                    <a href="#about" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-                    <a href="#projects" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
-                    <a href="#services" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
-                    <a href="#testimonials" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Testimonials</a>
-                    <a href="#blog" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</a>
-                    <a href="#contact" class="block hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
-                </div>
-            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <span class="iconify" data-icon="lucide:menu" data-width="24"></span>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#050505]/95 backdrop-blur-md hidden flex-col items-center justify-center gap-8">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-white">
+            <span class="iconify" data-icon="lucide:x" data-width="24"></span>
+        </button>
+        <a href="#about" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">About</a>
+        <a href="#skills" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">Skills</a>
+        <a href="#certifications" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">Certs</a>
+        <a href="#projects" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">Projects</a>
+        <a href="#labs" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">Labs</a>
+        <a href="#contact" class="mobile-link text-2xl font-display font-medium text-white/70 hover:text-white transition-colors">Contact</a>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="floating-animation absolute top-20 left-10 w-20 h-20 bg-white rounded-full"></div>
-            <div class="floating-animation absolute top-40 right-20 w-16 h-16 bg-cyan-300 rounded-full" style="animation-delay: -2s;"></div>
-            <div class="floating-animation absolute bottom-40 left-1/4 w-12 h-12 bg-orange-300 rounded-full" style="animation-delay: -4s;"></div>
-        </div>
-        
-        <div class="text-center text-white z-10 max-w-4xl mx-auto px-4 sm:px-6">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                Building Scalable Backend Systems & Cloud Solutions
-            </h1>
-            <p class="text-lg sm:text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-                Backend Engineer and AWS Solutions Architect Associate with hands-on experience building scalable backend systems, managing cloud infrastructure, and delivering reliable technical solutions that align with business needs.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#projects" class="bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
-                    <i class="fas fa-code mr-2"></i>
-                    View My Work
-                </a>
-                <a href="#contact" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center">
-                    <i class="fas fa-handshake mr-2"></i>
-                    Hire Me
-                </a>
+    <section class="min-h-screen flex flex-col justify-center pt-32 pb-12 relative">
+        <div class="max-w-screen-2xl mx-auto px-6 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-8">
+                    <div class="flex items-center gap-3 mb-8 animate-fade-in-up" style="opacity:0">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" style="animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs font-semibold uppercase tracking-widest text-neutral-400">Available for opportunities</span>
+                    </div>
+                    <h1 class="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter mb-8 animate-fade-in-up delay-100" style="opacity:0">
+                        Backend<br>
+                        <span class="text-neutral-500">Developer</span> &<br>
+                        <span class="aws-gradient">DevOps</span><br>
+                        Engineer
+                    </h1>
+                    <p class="text-lg md:text-xl font-light text-neutral-400 max-w-xl leading-relaxed mb-10 animate-fade-in-up delay-200" style="opacity:0">
+                        Crafting scalable Django applications and architecting resilient cloud infrastructure on AWS. Turning complex deployment challenges into automated, repeatable solutions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300" style="opacity:0">
+                        <a href="#projects" class="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 text-xs font-medium uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                            View Projects
+                            <span class="iconify" data-icon="lucide:arrow-down-right" data-width="14"></span>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center gap-2 border border-neutral-700 px-8 py-4 text-xs font-medium uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                            Get in Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 animate-fade-in-up delay-400" style="opacity:0">
+                    <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg overflow-hidden">
+                        <div class="flex items-center gap-2 px-4 py-3 border-b border-neutral-800">
+                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            <span class="text-xs text-neutral-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <div class="p-5 font-mono text-sm space-y-2">
+                            <p class="text-green-400">$ whoami</p>
+                            <p class="text-neutral-300">→ backend_dev / devops_enthusiast</p>
+                            <p class="text-green-400 mt-3">$ cat stack.txt</p>
+                            <p class="text-neutral-300">→ Django · Python · AWS</p>
+                            <p class="text-neutral-300">→ Docker · CI/CD · Terraform</p>
+                            <p class="text-green-400 mt-3">$ aws sts get-caller-identity</p>
+                            <p class="text-neutral-300">→ "Cloud Practitioner ✓"</p>
+                            <p class="text-green-400 mt-3">$ echo $GOAL</p>
+                            <p class="text-neutral-300">→ "Solutions Architect Associate"</p>
+                            <p class="text-green-400 mt-3">$ <span class="border-r-2 border-green-400 animate-pulse">&nbsp;</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in-up delay-500" style="opacity:0">
+            <span class="text-[10px] uppercase tracking-widest text-neutral-600">Scroll</span>
+            <div class="w-px h-8 bg-gradient-to-b from-neutral-600 to-transparent"></div>
+        </div>
     </section>
+
+    <!-- Marquee -->
+    <div class="border-y border-neutral-800 py-4 overflow-hidden backdrop-blur-sm bg-neutral-900/30">
+        <div class="flex animate-marquee whitespace-nowrap">
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:django-icon" data-width="18"></span> Django</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="18"></span> Python</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:aws" data-width="18"></span> AWS</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:docker-icon" data-width="18"></span> Docker</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:terraform-icon" data-width="18"></span> Terraform</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:github-actions" data-width="18"></span> GitHub Actions</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:linux-tux" data-width="18"></span> Linux</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:nginx" data-width="18"></span> Nginx</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:postgresql" data-width="18"></span> PostgreSQL</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:redis" data-width="18"></span> Redis</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:kubernetes" data-width="18"></span> Kubernetes</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:git-icon" data-width="18"></span> Git</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:django-icon" data-width="18"></span> Django</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:python" data-width="18"></span> Python</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:aws" data-width="18"></span> AWS</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:docker-icon" data-width="18"></span> Docker</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:terraform-icon" data-width="18"></span> Terraform</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:github-actions" data-width="18"></span> GitHub Actions</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:linux-tux" data-width="18"></span> Linux</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:nginx" data-width="18"></span> Nginx</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:postgresql" data-width="18"></span> PostgreSQL</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:redis" data-width="18"></span> Redis</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:kubernetes" data-width="18"></span> Kubernetes</span>
+            <span class="mx-8 text-sm font-medium text-neutral-500 flex items-center gap-2"><span class="iconify" data-icon="logos:git-icon" data-width="18"></span> Git</span>
+        </div>
+    </div>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">About Me</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    Passionate about building systems that power the digital world. I specialize in creating scalable backend architectures, optimizing cloud infrastructure, and implementing DevOps best practices.
-                </p>
-            </div>
-
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">My Journey</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">
-                        Abednego Tenge is a backend engineer and AWS Solutions Architect Associate passionate about building scalable, secure, and efficient cloud-based systems. He has successfully designed cloud infrastructures, optimized backend workflows, and delivered data-driven solutions that enhance business operations.
-                    </p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-8">
-                        Abed aims to help organizations implement high-performing systems while continuing to grow his expertise in cloud computing and software engineering. What sets him apart is his ability to design robust, scalable systems that align with business needs, ensuring projects run smoothly and deliver measurable results.
-                    </p>
-                    <a href="https://drive.google.com/file/d/1qPHf3GrOYrIxeOcppVQ-hPbgZBFajhe5/view?usp=sharing" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center">
-                        <i class="fas fa-download mr-2"></i>
-                        Download Resume
-                    </a>
+    <section id="about" class="py-24 md:py-32">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                <div class="lg:col-span-4">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">01 — About</span>
+                    <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">Who I Am</h2>
                 </div>
-                
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">Technical Skills</h3>
-                    <div class="space-y-6">
+                <div class="lg:col-span-8 space-y-6">
+                    <p class="text-lg md:text-xl font-light text-neutral-400 leading-relaxed">
+                        I'm a backend developer with deep roots in <span class="text-white font-normal">Django</span>, passionate about building robust APIs and scalable web applications. My journey started with writing Python code and has evolved into designing complete cloud architectures on AWS.
+                    </p>
+                    <p class="text-lg md:text-xl font-light text-neutral-400 leading-relaxed">
+                        As an <span class="text-green-400 font-normal">AWS Cloud Practitioner</span>, I've built a strong foundation in cloud concepts. Now I'm leveling up toward the <span class="text-green-400 font-normal">Solutions Architect Associate</span> certification, having completed extensive hands-on labs covering VPC design, multi-tier architectures, serverless patterns, and disaster recovery strategies.
+                    </p>
+                    <p class="text-lg md:text-xl font-light text-neutral-400 leading-relaxed">
+                        My goal is simple: bridge the gap between development and operations. I believe great software deserves great infrastructure — and I'm building the skills to deliver both.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-neutral-800">
                         <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Backend Development</span>
-                                <span class="text-blue-600">95%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                                <div class="skill-bar bg-blue-600 h-3 rounded-full" style="width: 95%"></div>
-                            </div>
+                            <div class="font-display font-medium text-3xl text-white">3+</div>
+                            <div class="text-sm text-neutral-500 mt-1">Years with Django</div>
                         </div>
-                        
                         <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Cloud Platforms (AWS/Azure/GCP)</span>
-                                <span class="text-blue-600">90%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                                <div class="skill-bar bg-blue-600 h-3 rounded-full" style="width: 90%"></div>
-                            </div>
+                            <div class="font-display font-medium text-3xl text-white">50+</div>
+                            <div class="text-sm text-neutral-500 mt-1">AWS Labs Done</div>
                         </div>
-                        
                         <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Database Design & Optimization</span>
-                                <span class="text-blue-600">88%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                                <div class="skill-bar bg-blue-600 h-3 rounded-full" style="width: 88%"></div>
-                            </div>
+                            <div class="font-display font-medium text-3xl text-white">1</div>
+                            <div class="text-sm text-neutral-500 mt-1">AWS Cert</div>
                         </div>
-                        
                         <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">DevOps & Infrastructure</span>
-                                <span class="text-blue-600">85%</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                                <div class="skill-bar bg-blue-600 h-3 rounded-full" style="width: 85%"></div>
-                            </div>
+                            <div class="font-display font-medium text-3xl text-white">∞</div>
+                            <div class="text-sm text-neutral-500 mt-1">Desire to Learn</div>
                         </div>
                     </div>
                 </div>
@@ -213,108 +286,508 @@
         </div>
     </section>
 
-    <section class="max-w-2xl mx-auto my-10 p-4 text-center">
-        <h2 class="text-2xl font-bold mb-4">My Elevator Pitch</h2>
-        <div class="aspect-w-16 aspect-h-9">
-            <iframe
-                    class="w-full h-64 rounded-xl shadow-lg"
-                    src="https://www.youtube.com/embed/vyF_oUWjl4Q"
-                    title="Elevator Pitch Video"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-            </iframe>
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">02 — Skills</span>
+                <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">Technical Arsenal</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Backend -->
+                <div class="group bg-neutral-900/50 border border-neutral-800 rounded-lg p-6 hover:bg-neutral-900/80 transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                            <span class="iconify text-green-400" data-icon="lucide:server" data-width="20"></span>
+                        </div>
+                        <h3 class="font-display font-medium text-lg">Backend Development</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Django / DRF</span><span class="text-green-400">95%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-green-500 rounded-full" data-width="95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Python</span><span class="text-green-400">90%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-green-500 rounded-full" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">REST APIs</span><span class="text-green-400">90%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-green-500 rounded-full" data-width="90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">PostgreSQL</span><span class="text-green-400">80%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-green-500 rounded-full" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- AWS Cloud -->
+                <div class="group bg-neutral-900/50 border border-neutral-800 rounded-lg p-6 hover:bg-neutral-900/80 transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                            <span class="iconify text-amber-400" data-icon="lucide:cloud" data-width="20"></span>
+                        </div>
+                        <h3 class="font-display font-medium text-lg">AWS Cloud</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">EC2 / VPC / Networking</span><span class="text-amber-400">85%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-amber-500 rounded-full" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">S3 / RDS / DynamoDB</span><span class="text-amber-400">85%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-amber-500 rounded-full" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Lambda / API Gateway</span><span class="text-amber-400">75%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-amber-500 rounded-full" data-width="75%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">IAM / CloudWatch / CDK</span><span class="text-amber-400">70%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-amber-500 rounded-full" data-width="70%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- DevOps -->
+                <div class="group bg-neutral-900/50 border border-neutral-800 rounded-lg p-6 hover:bg-neutral-900/80 transition-all duration-500">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+                            <span class="iconify text-cyan-400" data-icon="lucide:infinity" data-width="20"></span>
+                        </div>
+                        <h3 class="font-display font-medium text-lg">DevOps & Tooling</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Docker / Compose</span><span class="text-cyan-400">85%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-cyan-500 rounded-full" data-width="85%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">CI/CD Pipelines</span><span class="text-cyan-400">80%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-cyan-500 rounded-full" data-width="80%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Linux / Bash</span><span class="text-cyan-400">80%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-cyan-500 rounded-full" data-width="80%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Terraform / IaC</span><span class="text-cyan-400">65%</span></div>
+                            <div class="h-1 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-bar h-full bg-cyan-500 rounded-full" data-width="65%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">03 — Certifications</span>
+                <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">Credentials</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Earned: CCP -->
+                <div class="cert-badge border border-neutral-800 rounded-lg p-8 relative overflow-hidden group hover:border-neutral-700 transition-all duration-500">
+                    <div class="absolute top-0 right-0 bg-green-500 text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1">Earned</div>
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 rounded-lg bg-[#ff9900]/10 flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-[#ff9900]" data-icon="logos:aws" data-width="36"></span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-medium text-xl mb-1">AWS Cloud Practitioner</h3>
+                            <p class="text-sm text-neutral-500 mb-3">Amazon Web Services</p>
+                            <p class="text-sm text-neutral-400 leading-relaxed">Foundational understanding of AWS Cloud concepts, services, security, architecture, and pricing. Validated cloud fluency and business impact awareness.</p>
+                            <div class="flex items-center gap-2 mt-4 text-green-400 text-sm">
+                                <span class="iconify" data-icon="lucide:check-circle" data-width="16"></span>
+                                <span>Verified & Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- In Progress: SAA -->
+                <div class="cert-badge border border-neutral-800 rounded-lg p-8 relative overflow-hidden group hover:border-green-500/30 transition-all duration-500">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1">In Progress</div>
+                    <div class="flex items-start gap-5">
+                        <div class="w-16 h-16 rounded-lg bg-[#ff9900]/10 flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-[#ff9900]" data-icon="logos:aws" data-width="36"></span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-medium text-xl mb-1">Solutions Architect Associate</h3>
+                            <p class="text-sm text-neutral-500 mb-3">Amazon Web Services</p>
+                            <p class="text-sm text-neutral-400 leading-relaxed">Designing distributed systems, multi-tier architectures, high availability, and cost-optimized solutions on AWS. Deep hands-on with VPCs, routing, security groups, and more.</p>
+                            <div class="mt-4">
+                                <div class="flex justify-between text-sm mb-1"><span class="text-neutral-400">Preparation Progress</span><span class="text-amber-400">75%</span></div>
+                                <div class="h-1.5 bg-neutral-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-green-500 rounded-full" style="width:75%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">
-                    A showcase of my recent work in backend systems and cloud infrastructure
-                </p>
+    <section id="projects" class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">04 — Projects</span>
+                    <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">Featured Work</h2>
+                </div>
+                <a href="https://github.com" target="_blank" class="hidden md:flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors duration-300">
+                    View All on GitHub
+                    <span class="iconify" data-icon="lucide:external-link" data-width="14"></span>
+                </a>
             </div>
-            
-            <div class="flex justify-center mb-12 px-4">
-                <div class="flex flex-wrap gap-2 sm:gap-4 justify-center">
-                    <button class="filter-btn bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base" data-filter="all">All</button>
-                    <button class="filter-btn bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition-colors text-sm sm:text-base" data-filter="cloud">Cloud</button>
-                    <button class="filter-btn bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition-colors text-sm sm:text-base" data-filter="api">APIs</button>
-                    <button class="filter-btn bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition-colors text-sm sm:text-base" data-filter="database">Databases</button>
-                    <button class="filter-btn bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 sm:px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition-colors text-sm sm:text-base" data-filter="automation">Automation</button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+
+                <!-- Project 1: Django REST API on ECS -->
+                <div class="group project-card">
+                    <a href="#" class="block">
+                        <div class="project-visual aspect-[4/3] rounded-lg mb-6 bg-neutral-900/80 border border-neutral-800 p-6 flex items-center justify-center overflow-hidden transition-all duration-500">
+                            <svg viewBox="0 0 440 260" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="170" y="8" width="100" height="28" rx="4" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="220" y="26" text-anchor="middle" fill="#737373" font-size="9" font-family="Inter">Users</text>
+                                <line x1="220" y1="36" x2="220" y2="48" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <rect x="160" y="48" width="120" height="24" rx="4" fill="#0d1f0d" stroke="#4ade80" stroke-width="0.8"/>
+                                <text x="220" y="64" text-anchor="middle" fill="#4ade80" font-size="8" font-family="Inter">Route 53</text>
+                                <line x1="220" y1="72" x2="220" y2="84" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <rect x="145" y="84" width="150" height="24" rx="4" fill="#1a1a0d" stroke="#f59e0b" stroke-width="0.8"/>
+                                <text x="220" y="100" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="Inter">App Load Balancer</text>
+                                <line x1="170" y1="108" x2="110" y2="128" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <line x1="270" y1="108" x2="330" y2="128" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <rect x="40" y="128" width="140" height="36" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="1.2"/>
+                                <text x="110" y="148" text-anchor="middle" fill="#4ade80" font-size="9" font-family="Inter" font-weight="600">Django (ECS)</text>
+                                <text x="110" y="160" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">Task 1 — AZ-1a</text>
+                                <rect x="260" y="128" width="140" height="36" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="1.2"/>
+                                <text x="330" y="148" text-anchor="middle" fill="#4ade80" font-size="9" font-family="Inter" font-weight="600">Django (ECS)</text>
+                                <text x="330" y="160" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">Task 2 — AZ-1b</text>
+                                <line x1="330" y1="164" x2="330" y2="186" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <rect x="260" y="186" width="140" height="28" rx="4" fill="#0d0d1f" stroke="#3b82f6" stroke-width="0.8"/>
+                                <text x="330" y="204" text-anchor="middle" fill="#3b82f6" font-size="8" font-family="Inter">RDS PostgreSQL</text>
+                                <line x1="110" y1="164" x2="110" y2="186" stroke="#333" stroke-width="1" class="flow-arrow"/>
+                                <rect x="40" y="186" width="140" height="28" rx="4" fill="#1f0d0d" stroke="#ef4444" stroke-width="0.8"/>
+                                <text x="110" y="204" text-anchor="middle" fill="#ef4444" font-size="8" font-family="Inter">ElastiCache Redis</text>
+                                <rect x="24" y="78" width="392" height="148" rx="6" fill="none" stroke="#262626" stroke-width="0.8" stroke-dasharray="6 3"/>
+                                <text x="40" y="92" fill="#404040" font-size="7" font-family="Inter">VPC</text>
+                                <rect x="80" y="236" width="110" height="20" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="135" y="250" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">CloudWatch</text>
+                                <rect x="250" y="236" width="110" height="20" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="305" y="250" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">GitHub Actions</text>
+                            </svg>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-green-400 mb-2 block">Django + AWS</span>
+                                <h3 class="font-display font-medium text-2xl mb-2">Django REST API on ECS</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-md">Containerized Django REST API deployed on AWS ECS with Fargate, ALB, RDS PostgreSQL, and auto-scaling. CI/CD pipeline via GitHub Actions.</p>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-white group-hover:-translate-x-1 group-hover:translate-y-1 transition-all duration-300 flex-shrink-0 mt-2" data-icon="lucide:arrow-up-right" data-width="20"></span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Django</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">ECS Fargate</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">RDS</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">GitHub Actions</span>
+                        </div>
+                    </a>
                 </div>
+
+                <!-- Project 2: Serverless CI/CD Pipeline -->
+                <div class="group project-card">
+                    <a href="#" class="block">
+                        <div class="project-visual aspect-[4/3] rounded-lg mb-6 bg-neutral-900/80 border border-neutral-800 p-6 flex items-center justify-center overflow-hidden transition-all duration-500">
+                            <svg viewBox="0 0 440 260" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="30" width="80" height="50" rx="5" fill="#1a1a1a" stroke="#333" stroke-width="0.8"/>
+                                <text x="50" y="52" text-anchor="middle" fill="#737373" font-size="7" font-family="Inter">git push</text>
+                                <text x="50" y="66" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">GitHub</text>
+                                <line x1="90" y1="55" x2="120" y2="55" stroke="#4ade80" stroke-width="1" class="flow-arrow"/>
+                                <rect x="120" y="30" width="80" height="50" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="0.8"/>
+                                <text x="160" y="52" text-anchor="middle" fill="#4ade80" font-size="7" font-family="Inter">Build &</text>
+                                <text x="160" y="64" text-anchor="middle" fill="#4ade80" font-size="7" font-family="Inter">Test</text>
+                                <line x1="200" y1="55" x2="230" y2="55" stroke="#4ade80" stroke-width="1" class="flow-arrow"/>
+                                <rect x="230" y="30" width="80" height="50" rx="5" fill="#1a1a0d" stroke="#f59e0b" stroke-width="0.8"/>
+                                <text x="270" y="52" text-anchor="middle" fill="#f59e0b" font-size="7" font-family="Inter">Docker</text>
+                                <text x="270" y="64" text-anchor="middle" fill="#f59e0b" font-size="7" font-family="Inter">Build</text>
+                                <line x1="310" y1="55" x2="340" y2="55" stroke="#f59e0b" stroke-width="1" class="flow-arrow"/>
+                                <rect x="340" y="30" width="80" height="50" rx="5" fill="#0d0d1f" stroke="#3b82f6" stroke-width="0.8"/>
+                                <text x="380" y="52" text-anchor="middle" fill="#3b82f6" font-size="7" font-family="Inter">Push to</text>
+                                <text x="380" y="64" text-anchor="middle" fill="#3b82f6" font-size="7" font-family="Inter">ECR</text>
+                                <line x1="380" y1="80" x2="380" y2="110" stroke="#3b82f6" stroke-width="1" class="flow-arrow"/>
+                                <rect x="300" y="110" width="130" height="36" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="1"/>
+                                <text x="365" y="130" text-anchor="middle" fill="#4ade80" font-size="8" font-family="Inter" font-weight="600">Deploy to ECS</text>
+                                <text x="365" y="142" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Terraform apply</text>
+                                <rect x="10" y="110" width="110" height="36" rx="5" fill="#1f0d1f" stroke="#c084fc" stroke-width="0.8"/>
+                                <text x="65" y="130" text-anchor="middle" fill="#c084fc" font-size="8" font-family="Inter">API Gateway</text>
+                                <text x="65" y="142" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">REST endpoints</text>
+                                <line x1="120" y1="128" x2="150" y2="128" stroke="#c084fc" stroke-width="1" class="flow-arrow"/>
+                                <rect x="150" y="110" width="110" height="36" rx="5" fill="#0d1f1f" stroke="#22d3ee" stroke-width="0.8"/>
+                                <text x="205" y="130" text-anchor="middle" fill="#22d3ee" font-size="8" font-family="Inter">Lambda</text>
+                                <text x="205" y="142" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Python handlers</text>
+                                <line x1="205" y1="146" x2="205" y2="170" stroke="#22d3ee" stroke-width="1" class="flow-arrow"/>
+                                <rect x="150" y="170" width="110" height="28" rx="4" fill="#1f1f0d" stroke="#f59e0b" stroke-width="0.8"/>
+                                <text x="205" y="188" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="Inter">DynamoDB</text>
+                                <rect x="150" y="210" width="110" height="28" rx="4" fill="#1a1a1a" stroke="#ef4444" stroke-width="0.8"/>
+                                <text x="205" y="228" text-anchor="middle" fill="#ef4444" font-size="8" font-family="Inter">SQS Queue</text>
+                                <line x1="205" y1="198" x2="205" y2="210" stroke="#ef4444" stroke-width="1" class="flow-arrow"/>
+                                <rect x="310" y="170" width="120" height="20" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="370" y="184" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">Terraform (IaC)</text>
+                            </svg>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2 block">Serverless + DevOps</span>
+                                <h3 class="font-display font-medium text-2xl mb-2">Serverless CI/CD Pipeline</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-md">Event-driven serverless architecture with Lambda, API Gateway, DynamoDB, and SQS. Fully automated deployment pipeline with infrastructure as code.</p>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-white group-hover:-translate-x-1 group-hover:translate-y-1 transition-all duration-300 flex-shrink-0 mt-2" data-icon="lucide:arrow-up-right" data-width="20"></span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Lambda</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">API Gateway</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Terraform</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">DynamoDB</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Project 3: Multi-Env Terraform -->
+                <div class="group project-card">
+                    <a href="#" class="block">
+                        <div class="project-visual aspect-[4/3] rounded-lg mb-6 bg-neutral-900/80 border border-neutral-800 p-6 flex items-center justify-center overflow-hidden transition-all duration-500">
+                            <svg viewBox="0 0 440 260" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="160" y="8" width="120" height="28" rx="4" fill="#1a1a1a" stroke="#7c3aed" stroke-width="1"/>
+                                <text x="220" y="26" text-anchor="middle" fill="#a78bfa" font-size="9" font-family="Inter" font-weight="600">Terraform Modules</text>
+                                <line x1="175" y1="36" x2="100" y2="58" stroke="#7c3aed" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="220" y1="36" x2="220" y2="58" stroke="#7c3aed" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="265" y1="36" x2="340" y2="58" stroke="#7c3aed" stroke-width="0.8" class="flow-arrow"/>
+                                <rect x="20" y="58" width="160" height="80" rx="6" fill="#0d1f0d" stroke="#4ade80" stroke-width="0.8" stroke-dasharray="4 2"/>
+                                <text x="100" y="76" text-anchor="middle" fill="#4ade80" font-size="8" font-family="Inter" font-weight="600">DEV</text>
+                                <rect x="32" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="62" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">1x ECS</text>
+                                <rect x="100" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="130" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">t3.small</text>
+                                <rect x="32" y="108" width="136" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="100" y="120" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">Dev RDS · 1 node</text>
+                                <rect x="140" y="58" width="160" height="80" rx="6" fill="#1a1a0d" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="4 2"/>
+                                <text x="220" y="76" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="Inter" font-weight="600">STAGING</text>
+                                <rect x="152" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="182" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">2x ECS</text>
+                                <rect x="220" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="250" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">t3.medium</text>
+                                <rect x="152" y="108" width="136" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="220" y="120" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">Staging RDS · 2 nodes</text>
+                                <rect x="260" y="58" width="160" height="80" rx="6" fill="#1f0d0d" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="4 2"/>
+                                <text x="340" y="76" text-anchor="middle" fill="#ef4444" font-size="8" font-family="Inter" font-weight="600">PRODUCTION</text>
+                                <rect x="272" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="302" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">4x ECS</text>
+                                <rect x="340" y="84" width="60" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="370" y="96" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">t3.large</text>
+                                <rect x="272" y="108" width="136" height="18" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="340" y="120" text-anchor="middle" fill="#737373" font-size="6" font-family="Inter">Prod RDS · Multi-AZ</text>
+                                <line x1="100" y1="138" x2="100" y2="158" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="220" y1="138" x2="220" y2="158" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="340" y1="138" x2="340" y2="158" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <rect x="40" y="158" width="120" height="24" rx="4" fill="#1a1a1a" stroke="#22d3ee" stroke-width="0.6"/>
+                                <text x="100" y="174" text-anchor="middle" fill="#22d3ee" font-size="7" font-family="Inter">CloudWatch Alarms</text>
+                                <rect x="160" y="158" width="120" height="24" rx="4" fill="#1a1a1a" stroke="#c084fc" stroke-width="0.6"/>
+                                <text x="220" y="174" text-anchor="middle" fill="#c084fc" font-size="7" font-family="Inter">SNS Notifications</text>
+                                <rect x="280" y="158" width="120" height="24" rx="4" fill="#1a1a1a" stroke="#4ade80" stroke-width="0.6"/>
+                                <text x="340" y="174" text-anchor="middle" fill="#4ade80" font-size="7" font-family="Inter">Cost Dashboard</text>
+                                <rect x="100" y="200" width="240" height="24" rx="4" fill="#1a1a1a" stroke="#7c3aed" stroke-width="0.6"/>
+                                <text x="220" y="216" text-anchor="middle" fill="#a78bfa" font-size="7" font-family="Inter">S3 Backend + DynamoDB Lock (State Mgmt)</text>
+                                <rect x="100" y="232" width="240" height="20" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="220" y="246" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">VPC · Security Groups · IAM · Monitoring (shared modules)</text>
+                            </svg>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2 block">Monitoring + IaC</span>
+                                <h3 class="font-display font-medium text-2xl mb-2">Multi-Env Terraform Setup</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-md">Terraform modules for managing multi-environment AWS infrastructure with CloudWatch monitoring, alerting, and cost optimization dashboards.</p>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-white group-hover:-translate-x-1 group-hover:translate-y-1 transition-all duration-300 flex-shrink-0 mt-2" data-icon="lucide:arrow-up-right" data-width="20"></span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Terraform</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">CloudWatch</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">SNS</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">VPC</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Project 4: Django Microservice Template -->
+                <div class="group project-card">
+                    <a href="#" class="block">
+                        <div class="project-visual aspect-[4/3] rounded-lg mb-6 bg-neutral-900/80 border border-neutral-800 p-6 flex items-center justify-center overflow-hidden transition-all duration-500">
+                            <svg viewBox="0 0 440 260" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="140" y="8" width="160" height="28" rx="4" fill="#1a1a1a" stroke="#22d3ee" stroke-width="1"/>
+                                <text x="220" y="26" text-anchor="middle" fill="#22d3ee" font-size="9" font-family="Inter" font-weight="600">docker-compose.yml</text>
+                                <line x1="120" y1="36" x2="70" y2="56" stroke="#22d3ee" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="180" y1="36" x2="155" y2="56" stroke="#22d3ee" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="260" y1="36" x2="285" y2="56" stroke="#22d3ee" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="320" y1="36" x2="370" y2="56" stroke="#22d3ee" stroke-width="0.8" class="flow-arrow"/>
+                                <rect x="15" y="56" width="110" height="44" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="1"/>
+                                <text x="70" y="76" text-anchor="middle" fill="#4ade80" font-size="9" font-family="Inter" font-weight="600">Nginx</text>
+                                <text x="70" y="90" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Reverse Proxy :80</text>
+                                <rect x="100" y="56" width="110" height="44" rx="5" fill="#0d1f0d" stroke="#4ade80" stroke-width="1.2"/>
+                                <text x="155" y="76" text-anchor="middle" fill="#4ade80" font-size="9" font-family="Inter" font-weight="600">Django</text>
+                                <text x="155" y="90" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Gunicorn :8000</text>
+                                <rect x="230" y="56" width="110" height="44" rx="5" fill="#1f0d0d" stroke="#f59e0b" stroke-width="1"/>
+                                <text x="285" y="76" text-anchor="middle" fill="#f59e0b" font-size="9" font-family="Inter" font-weight="600">Celery</text>
+                                <text x="285" y="90" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Worker × 2</text>
+                                <rect x="315" y="56" width="110" height="44" rx="5" fill="#1f0d0d" stroke="#f59e0b" stroke-width="0.8"/>
+                                <text x="370" y="76" text-anchor="middle" fill="#f59e0b" font-size="9" font-family="Inter" font-weight="600">Celery Beat</text>
+                                <text x="370" y="90" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Scheduler</text>
+                                <line x1="70" y1="100" x2="70" y2="130" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="155" y1="100" x2="155" y2="130" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <line x1="285" y1="100" x2="285" y2="130" stroke="#333" stroke-width="0.8" class="flow-arrow"/>
+                                <rect x="15" y="130" width="110" height="36" rx="5" fill="#1f0d0d" stroke="#ef4444" stroke-width="1"/>
+                                <text x="70" y="150" text-anchor="middle" fill="#ef4444" font-size="9" font-family="Inter" font-weight="600">Redis</text>
+                                <text x="70" y="162" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Broker :6379</text>
+                                <rect x="100" y="130" width="110" height="36" rx="5" fill="#0d0d1f" stroke="#3b82f6" stroke-width="1"/>
+                                <text x="155" y="150" text-anchor="middle" fill="#3b82f6" font-size="9" font-family="Inter" font-weight="600">PostgreSQL</text>
+                                <text x="155" y="162" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Database :5432</text>
+                                <rect x="230" y="130" width="110" height="36" rx="5" fill="#1a1a1a" stroke="#c084fc" stroke-width="0.8"/>
+                                <text x="285" y="150" text-anchor="middle" fill="#c084fc" font-size="9" font-family="Inter">Flower</text>
+                                <text x="285" y="162" text-anchor="middle" fill="#525252" font-size="6" font-family="Inter">Monitoring :5555</text>
+                                <rect x="60" y="190" width="320" height="24" rx="4" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="220" y="206" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">✓ Health checks  ·  ✓ Volume mounts  ·  ✓ .env config  ·  ✓ Makefile shortcuts</text>
+                                <rect x="5" y="48" width="430" height="130" rx="8" fill="none" stroke="#22d3ee" stroke-width="0.5" stroke-dasharray="6 3" opacity="0.4"/>
+                                <text x="20" y="60" fill="#22d3ee" font-size="6" font-family="Inter" opacity="0.5">docker network</text>
+                                <rect x="120" y="228" width="200" height="22" rx="3" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+                                <text x="220" y="243" text-anchor="middle" fill="#525252" font-size="7" font-family="Inter">Production-ready with one command</text>
+                            </svg>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-widest text-green-400 mb-2 block">Django + Docker</span>
+                                <h3 class="font-display font-medium text-2xl mb-2">Django Microservice Template</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-md">Production-ready Django microservice boilerplate with Docker Compose, Celery, Redis, Nginx reverse proxy, and pre-configured health checks.</p>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-white group-hover:-translate-x-1 group-hover:translate-y-1 transition-all duration-300 flex-shrink-0 mt-2" data-icon="lucide:arrow-up-right" data-width="20"></span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Django</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Docker</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Celery</span>
+                            <span class="text-[10px] uppercase tracking-wider px-2 py-1 bg-neutral-800 rounded text-neutral-400">Nginx</span>
+                        </div>
+                    </a>
+                </div>
+
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-category="cloud api">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-cloud-upload text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">AWS S3 Web Hosting</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Built a cost-effective static hosting architecture using AWS S3 and CloudFront, reducing infrastructure overhead while maintaining scalability and performance.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">java</span>
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm">AWS</span>
+        </div>
+    </section>
+
+    <!-- AWS Labs Section -->
+    <section id="labs" class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">05 — Hands-On Labs</span>
+                <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">AWS Lab Experience</h2>
+                <p class="text-lg font-light text-neutral-400 mt-4 max-w-2xl">Extensive hands-on practice designing, building, and troubleshooting AWS architectures — going far beyond theoretical knowledge.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-blue-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-blue-400" data-icon="lucide:network" data-width="16"></span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="https://github.com/AbednegoTenge/S3StaticWebsite" class="text-blue-600 hover:text-blue-700 font-medium">
-                                <i class="fab fa-github mr-1"></i>GitHub
-                            </a>
-                            <a href="https://abednegotenge.s3.us-east-1.amazonaws.com/index.html" class="text-blue-600 hover:text-blue-700 font-medium">
-                                <i class="fas fa-external-link-alt mr-1"></i>Live Demo
-                            </a>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">VPC Design & Subnetting</h4>
+                            <p class="text-xs text-neutral-500">Custom VPCs with public/private subnets, NAT Gateways, NACLs, and route tables</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-category="cloud">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <i class="fas fa-link text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">VPC Peering</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Configured secure VPC Peering to facilitate private communication between services across multiple AWS VPCs without exposing data to the public internet
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">AWS</span>
-                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm">NextWork</span>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-green-400" data-icon="lucide:layers" data-width="16"></span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="https://drive.google.com/file/d/1v71bimqpJXdzdTYp-BqkgN3-WHGYUhZC/view?usp=drive_link" class="text-blue-600 hover:text-blue-700 font-medium">
-                                <i class="fas fa-external-link-alt mr-1"></i>Live Demo
-                            </a>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Multi-Tier Architecture</h4>
+                            <p class="text-xs text-neutral-500">Web/App/DB tiers with ALB, Auto Scaling Groups, and RDS Multi-AZ</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden" data-category="api database">
-                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
-                        <i class="fas fa-plug text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-3">YouTube API</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Implemented CRUD functionality with the YouTube Data API, enabling seamless video management including uploading, retrieving, updating, and deleting content programmatically.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Python</span>
-                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Flask</span>
-<!--                            <span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm">Jenkins</span>-->
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-purple-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-purple-400" data-icon="lucide:shield" data-width="16"></span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="https://github.com/AbednegoTenge/Youtube_Api" class="text-blue-600 hover:text-blue-700 font-medium">
-                                <i class="fab fa-github mr-1"></i>GitHub
-                            </a>
-<!--                            <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">-->
-<!--                                <i class="fas fa-external-link-alt mr-1"></i>Live Demo-->
-<!--                            </a>-->
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Security & IAM</h4>
+                            <p class="text-xs text-neutral-500">Least privilege IAM policies, roles, KMS encryption, and security groups</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-orange-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-orange-400" data-icon="lucide:zap" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Serverless Patterns</h4>
+                            <p class="text-xs text-neutral-500">Lambda, API Gateway, DynamoDB, Step Functions, and EventBridge</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-red-400" data-icon="lucide:rotate-ccw" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Disaster Recovery</h4>
+                            <p class="text-xs text-neutral-500">Multi-region replication, Route 53 failover, backup/restore strategies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-cyan-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-cyan-400" data-icon="lucide:container" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Container Orchestration</h4>
+                            <p class="text-xs text-neutral-500">ECS Fargate, ECR, EKS basics, and Docker on AWS deployment</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-yellow-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-yellow-400" data-icon="lucide:database" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Database & Caching</h4>
+                            <p class="text-xs text-neutral-500">RDS, Aurora, DynamoDB, ElastiCache Redis, and read replicas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-pink-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-pink-400" data-icon="lucide:git-branch" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Hybrid & Connectivity</h4>
+                            <p class="text-xs text-neutral-500">VPN, Direct Connect, VPC Peering, Transit Gateway, and endpoint services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-5 hover:border-neutral-700 hover:bg-neutral-900/80 transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span class="iconify text-emerald-400" data-icon="lucide:bar-chart-3" data-width="16"></span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-1">Cost Optimization</h4>
+                            <p class="text-xs text-neutral-500">Reserved Instances, Spot Fleets, Cost Explorer, and rightsizing strategies</p>
                         </div>
                     </div>
                 </div>
@@ -322,315 +795,122 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Architecture Diagram Section -->
+    <section class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Services Offered</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Comprehensive backend and cloud solutions to power your business
-                </p>
+                <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">06 — Architecture</span>
+                <h2 class="font-display font-medium text-4xl md:text-5xl tracking-tight leading-tight">Sample Cloud Architecture</h2>
+                <p class="text-lg font-light text-neutral-400 mt-4 max-w-xl mx-auto">A typical production-grade architecture I design — high availability, scalable, and secure.</p>
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-server text-2xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Backend Development</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Scalable APIs, microservices architecture, and robust backend systems using modern frameworks and best practices.
-                    </p>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-cyan-100 dark:bg-cyan-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-cloud text-2xl text-cyan-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Cloud Migration</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Seamless migration to AWS, Azure, or GCP with optimized architecture for performance and cost-efficiency.
-                    </p>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-plug text-2xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">API Integration</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Third-party API integrations, custom API development, and API gateway implementation for seamless connectivity.
-                    </p>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-database text-2xl text-purple-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Database Optimization</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Database design, performance tuning, and optimization for SQL and NoSQL databases to handle high-volume data.
-                    </p>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-infinity text-2xl text-orange-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">DevOps & CI/CD</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Automated deployment pipelines, infrastructure as code, and monitoring solutions for reliable operations.
-                    </p>
-                </div>
-                
-                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-shield-alt text-2xl text-red-600"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-4">Security & Compliance</h3>
-                    <p class="text-gray-600 dark:text-gray-300">
-                        Implementation of security best practices, compliance frameworks, and vulnerability assessments.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Client Testimonials</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">
-                    What clients say about working with me
-                </p>
-            </div>
-            
-            <div class="relative">
-                <div class="testimonial-slider overflow-hidden">
-                    <div class="flex transition-transform duration-500 ease-in-out" id="testimonial-track">
-                        <div class="testimonial-card w-full flex-shrink-0 px-4">
-                            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
-                                <div class="flex items-center mb-6">
-                                    <div class="flex text-yellow-400 text-xl">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 italic">
-                                    "Abed transformed our legacy system into a modern, scalable architecture. The migration to AWS reduced our costs by 40% while improving performance significantly. His expertise in cloud infrastructure is exceptional."
-                                </p>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold mr-4">
-                                        SM
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold">Sarah Mitchell</h4>
-                                        <p class="text-gray-600 dark:text-gray-400">CTO, TechStart Inc.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="testimonial-card w-full flex-shrink-0 px-4">
-                            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
-                                <div class="flex items-center mb-6">
-                                    <div class="flex text-yellow-400 text-xl">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 italic">
-                                    "Working with Abed was a game-changer for our API infrastructure. He delivered a robust, high-performance solution that handles millions of requests daily. His attention to detail and proactive communication made the project seamless."
-                                </p>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold mr-4">
-                                        MJ
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold">Michael Johnson</h4>
-                                        <p class="text-gray-600 dark:text-gray-400">Lead Developer, DataFlow Solutions</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="testimonial-card w-full flex-shrink-0 px-4">
-                            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
-                                <div class="flex items-center mb-6">
-                                    <div class="flex text-yellow-400 text-xl">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 italic">
-                                    "Abed's DevOps expertise helped us achieve 99.9% uptime and reduced our deployment time from hours to minutes. His automation solutions and monitoring setup have been invaluable for our operations team."
-                                </p>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold mr-4">
-                                        ER
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold">Emily Rodriguez</h4>
-                                        <p class="text-gray-600 dark:text-gray-400">Operations Manager, CloudTech Corp</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="testimonial-prev absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow">
-                    <i class="fas fa-chevron-left text-gray-600 dark:text-gray-300 text-sm sm:text-base"></i>
-                </button>
-                <button class="testimonial-next absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow">
-                    <i class="fas fa-chevron-right text-gray-600 dark:text-gray-300 text-sm sm:text-base"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Latest Blog Posts</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Insights on backend development and cloud technologies
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-project-diagram text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-blue-600 dark:text-blue-400 mb-2">August 15, 2025.</div>
-                        <h3 class="text-xl font-semibold mb-3">Simplifying Complex Logic Diagrams</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Importance of diagrams on my learning journey as a backend developer.
-                        </p>
-                        <a href="https://www.linkedin.com/posts/abednegotenge_in-my-learning-journey-as-a-backend-developer-activity-7363277508416348161-D7qH?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEjEXk0BSgVJfJfg37Gv3OdA1d6JBxZoGRs" class="text-blue-600 hover:text-blue-700 font-medium">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-                
-                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <i class="fas fa-database text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-blue-600 dark:text-blue-400 mb-2">July 22, 2025</div>
-                        <h3 class="text-xl font-semibold mb-3">Database Scaling Patterns for High Traffic</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Explore different database scaling strategies including sharding, replication, and caching for high-traffic applications.
-                        </p>
-                        <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
-                        <i class="fas fa-rocket text-6xl text-white"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-blue-600 dark:text-blue-400 mb-2">June 6, 2025</div>
-                        <h3 class="text-xl font-semibold mb-3">Building Resilient Microservices</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">
-                            Best practices for designing fault-tolerant microservices that can handle failures gracefully and maintain system stability.
-                        </p>
-                        <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
+            <div class="bg-neutral-900/50 border border-neutral-800 rounded-lg p-8 md:p-12 overflow-x-auto">
+                <svg viewBox="0 0 900 500" class="w-full min-w-[700px]" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="370" y="10" width="160" height="40" rx="6" fill="#171717" stroke="#262626" stroke-width="1"/>
+                    <text x="450" y="35" text-anchor="middle" fill="#a3a3a3" font-size="12" font-family="Inter">👥 Users</text>
+                    <line x1="450" y1="50" x2="450" y2="70" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="370" y="70" width="160" height="40" rx="6" fill="#171717" stroke="#4ade80" stroke-width="1" stroke-dasharray="4 2"/>
+                    <text x="450" y="95" text-anchor="middle" fill="#4ade80" font-size="11" font-family="Inter">Route 53 (DNS)</text>
+                    <line x1="450" y1="110" x2="450" y2="130" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="350" y="130" width="200" height="40" rx="6" fill="#171717" stroke="#22d3ee" stroke-width="1"/>
+                    <text x="450" y="155" text-anchor="middle" fill="#22d3ee" font-size="11" font-family="Inter">☁️ CloudFront (CDN)</text>
+                    <line x1="450" y1="170" x2="450" y2="195" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="350" y="195" width="200" height="40" rx="6" fill="#171717" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="450" y="220" text-anchor="middle" fill="#f59e0b" font-size="11" font-family="Inter">⚖️ Application Load Balancer</text>
+                    <line x1="350" y1="235" x2="250" y2="270" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <line x1="550" y1="235" x2="650" y2="270" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="120" y="270" width="200" height="50" rx="6" fill="#0a1a0a" stroke="#4ade80" stroke-width="1.5"/>
+                    <text x="220" y="292" text-anchor="middle" fill="#4ade80" font-size="11" font-family="Inter" font-weight="600">Django (ECS Fargate)</text>
+                    <text x="220" y="308" text-anchor="middle" fill="#737373" font-size="9" font-family="Inter">AZ-1a</text>
+                    <rect x="580" y="270" width="200" height="50" rx="6" fill="#0a1a0a" stroke="#4ade80" stroke-width="1.5"/>
+                    <text x="680" y="292" text-anchor="middle" fill="#4ade80" font-size="11" font-family="Inter" font-weight="600">Django (ECS Fargate)</text>
+                    <text x="680" y="308" text-anchor="middle" fill="#737373" font-size="9" font-family="Inter">AZ-1b</text>
+                    <line x1="220" y1="320" x2="220" y2="360" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="120" y="360" width="200" height="40" rx="6" fill="#171717" stroke="#ef4444" stroke-width="1"/>
+                    <text x="220" y="385" text-anchor="middle" fill="#ef4444" font-size="11" font-family="Inter">🔴 ElastiCache (Redis)</text>
+                    <line x1="680" y1="320" x2="680" y2="360" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="580" y="360" width="200" height="40" rx="6" fill="#171717" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="680" y="385" text-anchor="middle" fill="#3b82f6" font-size="11" font-family="Inter">🗄️ RDS PostgreSQL</text>
+                    <rect x="350" y="270" width="200" height="40" rx="6" fill="#171717" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4 2"/>
+                    <text x="450" y="295" text-anchor="middle" fill="#f59e0b" font-size="11" font-family="Inter">📦 S3 (Static Assets)</text>
+                    <line x1="780" y1="380" x2="830" y2="380" stroke="#262626" stroke-width="1" class="architecture-line"/>
+                    <rect x="830" y="360" width="60" height="40" rx="6" fill="#171717" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 2"/>
+                    <text x="860" y="385" text-anchor="middle" fill="#60a5fa" font-size="9" font-family="Inter">Replica</text>
+                    <rect x="80" y="185" width="740" height="240" rx="8" fill="none" stroke="#262626" stroke-width="1" stroke-dasharray="8 4"/>
+                    <text x="100" y="205" fill="#525252" font-size="10" font-family="Inter">VPC (10.0.0.0/16)</text>
+                    <rect x="200" y="445" width="160" height="40" rx="6" fill="#171717" stroke="#262626" stroke-width="1"/>
+                    <text x="280" y="465" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter">🔐 WAF + Shield</text>
+                    <rect x="380" y="445" width="160" height="40" rx="6" fill="#171717" stroke="#262626" stroke-width="1"/>
+                    <text x="460" y="465" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter">📊 CloudWatch</text>
+                    <rect x="560" y="445" width="160" height="40" rx="6" fill="#171717" stroke="#262626" stroke-width="1"/>
+                    <text x="640" y="465" text-anchor="middle" fill="#a3a3a3" font-size="10" font-family="Inter">🔐 KMS Encryption</text>
+                </svg>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Ready to discuss your next project? Let's build something amazing together.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">Let's Connect</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-8 break-words">
-                        If you're looking for someone who can build scalable backend systems and optimize cloud infrastructure, I'd love the opportunity to contribute to your team or project. Let's discuss how we can work together to create efficient, reliable solutions that drive results.
+    <section id="contact" class="py-24 md:py-32 border-t border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-5">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4 block">07 — Contact</span>
+                    <h2 class="font-display font-medium text-5xl md:text-6xl lg:text-8xl tracking-tighter leading-none mb-6">Let's<br>Connect</h2>
+                    <p class="text-lg font-light text-neutral-400 leading-relaxed mb-8">
+                        Whether you need a backend built, cloud architecture designed, or DevOps pipelines automated — I'm ready to contribute.
                     </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Email</h4>
-                                <p class="text-gray-600 dark:text-gray-300 break-words">abednegotenge180@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fab fa-linkedin text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">LinkedIn</h4>
-                                <p class="text-gray-600 dark:text-gray-300 break-words">linkedin.com/in/abednegotenge</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                                <i class="fab fa-github text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">GitHub</h4>
-                                <p class="text-gray-600 dark:text-gray-300 break-words">github.com/AbednegoTenge</p>
-                            </div>
-                        </div>
+                    <div class="space-y-4">
+                        <a href="mailto:hello@example.com" class="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors duration-300 group">
+                            <span class="iconify" data-icon="lucide:mail" data-width="18"></span>
+                            <span class="text-sm">hello@example.com</span>
+                            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors duration-300 group">
+                            <span class="iconify" data-icon="lucide:linkedin" data-width="18"></span>
+                            <span class="text-sm">LinkedIn Profile</span>
+                            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </a>
+                        <a href="https://github.com" target="_blank" class="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors duration-300 group">
+                            <span class="iconify" data-icon="lucide:github" data-width="18"></span>
+                            <span class="text-sm">GitHub Profile</span>
+                            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+                        </a>
+                        <a href="#" class="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors duration-300 group">
+                            <span class="iconify" data-icon="lucide:file-text" data-width="18"></span>
+                            <span class="text-sm">Download Resume</span>
+                            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:download" data-width="14"></span>
+                        </a>
                     </div>
                 </div>
-                
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <div class="lg:col-span-7">
                     <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 block">Name</label>
+                                <input type="text" required class="w-full bg-transparent border border-neutral-800 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:border-neutral-500 focus:outline-none transition-colors" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 block">Email</label>
+                                <input type="email" required class="w-full bg-transparent border border-neutral-800 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:border-neutral-500 focus:outline-none transition-colors" placeholder="your@email.com">
+                            </div>
                         </div>
-                        
                         <div>
-                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                            <label class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 block">Subject</label>
+                            <input type="text" class="w-full bg-transparent border border-neutral-800 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:border-neutral-500 focus:outline-none transition-colors" placeholder="What's this about?">
                         </div>
-                        
                         <div>
-                            <label for="message" class="block text-sm font-medium mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"></textarea>
+                            <label class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2 block">Message</label>
+                            <textarea rows="6" required class="w-full bg-transparent border border-neutral-800 rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:border-neutral-500 focus:outline-none transition-colors resize-none" placeholder="Tell me about your project or opportunity..."></textarea>
                         </div>
-                        
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                            Send Message
-                        </button>
+                        <div class="flex items-center gap-4">
+                            <button type="submit" class="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 text-xs font-medium uppercase tracking-widest hover:bg-neutral-200 transition-colors">
+                                Send Message
+                                <span class="iconify" data-icon="lucide:send" data-width="14"></span>
+                            </button>
+                            <div id="form-toast" class="hidden text-sm text-green-400 flex items-center gap-2">
+                                <span class="iconify" data-icon="lucide:check-circle" data-width="16"></span>
+                                Message sent successfully!
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -638,194 +918,166 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="text-2xl font-bold text-blue-400 mb-4">Abednego Tenge</div>
-                <p class="text-gray-400 mb-6">Backend Engineer & AWS Solutions Architect Associate</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://www.linkedin.com/in/abednegotenge" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-linkedin text-2xl"></i>
-                    </a>
-                    <a href="https://github.com/AbednegoTenge" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-github text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-twitter text-2xl"></i>
-                    </a>
+    <footer class="border-t border-neutral-800 py-12">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-white text-black rounded-sm flex items-center justify-center font-display font-bold text-sm">&lt;/&gt;</div>
+                        <span class="font-display font-medium text-sm">devops.engineer</span>
+                    </div>
+                    <p class="text-sm text-neutral-500 leading-relaxed">Building scalable backends & automating cloud infrastructure.</p>
                 </div>
-                <p class="text-gray-400">
-                    © 2025 Abednego Tenge. All rights reserved.
-                </p>
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4">Navigation</h4>
+                    <div class="space-y-2">
+                        <a href="#about" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">About</a>
+                        <a href="#skills" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">Skills</a>
+                        <a href="#certifications" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">Certifications</a>
+                        <a href="#projects" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">Projects</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4">Cloud & DevOps</h4>
+                    <div class="space-y-2">
+                        <a href="#labs" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">AWS Labs</a>
+                        <a href="#" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">Architecture Diagrams</a>
+                        <a href="#" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">Infrastructure as Code</a>
+                        <a href="#" class="block text-sm text-neutral-500 hover:text-white transition-colors duration-300">CI/CD Templates</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-4">Connect</h4>
+                    <div class="space-y-2">
+                        <a href="https://github.com" target="_blank" class="flex items-center gap-2 text-sm text-neutral-500 hover:text-white transition-colors duration-300">
+                            <span class="iconify" data-icon="lucide:github" data-width="14"></span> GitHub
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="flex items-center gap-2 text-sm text-neutral-500 hover:text-white transition-colors duration-300">
+                            <span class="iconify" data-icon="lucide:linkedin" data-width="14"></span> LinkedIn
+                        </a>
+                        <a href="mailto:hello@example.com" class="flex items-center gap-2 text-sm text-neutral-500 hover:text-white transition-colors duration-300">
+                            <span class="iconify" data-icon="lucide:mail" data-width="14"></span> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-neutral-600">© 2024 — Designed & built with Django mindset ☕</p>
+                <p class="text-xs text-neutral-600">Infrastructure as Code • Everything Automated</p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
-        
-        // Load saved theme — default to dark unless user explicitly chose light
-        if (localStorage.getItem('theme') === 'light') {
-            html.classList.remove('dark');
-        } else {
-            html.classList.add('dark');
-        }
-        
-        // Mobile Menu Toggle
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
         const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
         });
-        
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
             });
         });
-        
-        // Project Filtering
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-                
-                // Update active button
-                filterButtons.forEach(btn => {
-                    btn.classList.remove('bg-blue-600', 'text-white');
-                    btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
-                });
-                button.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
-                button.classList.add('bg-blue-600', 'text-white');
-                
-                // Filter projects
-                projectCards.forEach(card => {
-                    const categories = card.getAttribute('data-category').split(' ');
-                    if (filter === 'all' || categories.includes(filter)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
+
+        // Section scroll animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
         });
-        
-        // Testimonial Slider
-        let currentTestimonial = 0;
-        const testimonialTrack = document.getElementById('testimonial-track');
-        const testimonialCards = document.querySelectorAll('.testimonial-card');
-        const totalTestimonials = testimonialCards.length;
-        
-        function updateTestimonialSlider() {
-            const translateX = -currentTestimonial * 100;
-            testimonialTrack.style.transform = `translateX(${translateX}%)`;
-        }
-        
-        document.querySelector('.testimonial-prev').addEventListener('click', () => {
-            currentTestimonial = currentTestimonial > 0 ? currentTestimonial - 1 : totalTestimonials - 1;
-            updateTestimonialSlider();
-        });
-        
-        document.querySelector('.testimonial-next').addEventListener('click', () => {
-            currentTestimonial = currentTestimonial < totalTestimonials - 1 ? currentTestimonial + 1 : 0;
-            updateTestimonialSlider();
-        });
-        
-        // Auto-advance testimonials
-        setInterval(() => {
-            currentTestimonial = currentTestimonial < totalTestimonials - 1 ? currentTestimonial + 1 : 0;
-            updateTestimonialSlider();
-        }, 5000);
-        
-        // Contact Form
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(e.target);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            
-            // Simulate form submission
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            e.target.reset();
-        });
-        
-        // Back to Top Button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    sectionObserver.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('section').forEach(section => {
+            sectionObserver.observe(section);
         });
-        
-        // Animate skill bars on scroll
-        const skillBars = document.querySelectorAll('.skill-bar');
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
+
+        // Hero animations
+        document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+            el.style.opacity = '1';
+        });
+
+        // Skill bars
         const skillObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
+                    const bars = entry.target.querySelectorAll('.skill-bar');
+                    bars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => { bar.style.width = width; }, 200);
+                    });
+                    skillObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
-        
-        skillBars.forEach(bar => {
-            skillObserver.observe(bar);
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('#skills .group').forEach(card => {
+            skillObserver.observe(card);
+        });
+        document.querySelectorAll('.skill-bar').forEach(bar => { bar.style.width = '0%'; });
+
+        // Contact form
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toast = document.getElementById('form-toast');
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            this.reset();
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Active nav on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('text-white');
+                link.classList.add('text-white/70');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-white/70');
+                }
+            });
         });
     </script>
-<script>(function(){function c(){let b=a.contentDocument||a.contentWindow.document;if(b){let d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d826be8553ee03',t:'MTc1NzYwNDA1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){let a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{let e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
